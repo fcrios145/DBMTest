@@ -3,9 +3,16 @@ namespace DBMTest
 {
     public class CreditCard
     {
-        public string Number { get; set; }
+        public string CreditCardNumber { get; set; }
         public double Balance { get; set; }
         public double Limit { get; set; }
+        public string CreditCardNamePlusType
+        {
+            get
+            {
+                return $"{CreditCardNumber} - {Type}";
+            }
+        }
         public double LimitAvailable { 
             get
             {
@@ -24,9 +31,9 @@ namespace DBMTest
             get
             {
                 int sum = 0;
-                for (int i = 0; i < Number.Length; i++)
+                for (int i = 0; i < CreditCardNumber.Length; i++)
                 {
-                    sum += Convert.ToInt32(char.GetNumericValue(Number[i]));
+                    sum += Convert.ToInt32(char.GetNumericValue(CreditCardNumber[i]));
                 }
                 switch (sum)
                 {

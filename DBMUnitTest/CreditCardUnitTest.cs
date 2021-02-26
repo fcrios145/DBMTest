@@ -9,10 +9,10 @@ namespace DBMUnitTest
         [Fact]
         public void TestTypes()
         {
-            CreditCard creditCardVisa = new CreditCard() { Number = "1234" };
-            CreditCard creditCardAmericanExpreess = new CreditCard() { Number = "5555" };
-            CreditCard creditCardMasterCard = new CreditCard() { Number = "8250" };
-            CreditCard creditCardNotFound = new CreditCard() { Number = "0101" };
+            CreditCard creditCardVisa = new CreditCard() { CreditCardNumber = "1234" };
+            CreditCard creditCardAmericanExpreess = new CreditCard() { CreditCardNumber = "5555" };
+            CreditCard creditCardMasterCard = new CreditCard() { CreditCardNumber = "8250" };
+            CreditCard creditCardNotFound = new CreditCard() { CreditCardNumber = "0101" };
 
 
             Assert.Equal("VISA", creditCardVisa.Type);
@@ -24,9 +24,9 @@ namespace DBMUnitTest
         [Fact]
         public void TestLimitAvailable()
         {
-            CreditCard creditCardVisa = new CreditCard() { Number = "1234", Limit = 100 };
-            CreditCard creditCardMasterCard = new CreditCard() { Number = "8250", Limit = 1000 };
-            CreditCard creditCardAmericanExpreess = new CreditCard() { Number = "5555", Limit = 200 };
+            CreditCard creditCardVisa = new CreditCard() { CreditCardNumber = "1234", Limit = 100 };
+            CreditCard creditCardMasterCard = new CreditCard() { CreditCardNumber = "8250", Limit = 1000 };
+            CreditCard creditCardAmericanExpreess = new CreditCard() { CreditCardNumber = "5555", Limit = 200 };
 
             Assert.Equal(100, creditCardVisa.LimitAvailable);
             Assert.Equal(1000, creditCardMasterCard.LimitAvailable);

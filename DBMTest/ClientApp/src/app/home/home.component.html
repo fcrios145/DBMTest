@@ -1,33 +1,37 @@
 <label>Customer:</label>
-<select name="customer">
-    <option value="customer1">customer 1</option>
+<select [(ngModel)]="customerValue" (change)="onSelect($event.target.value)">
+    <option *ngFor="let customer of customers" value={{customer.name}}>
+        {{customer.name}}
+    </option>
 </select>
-<button>+</button>
 
 <br />
 
 <label>Credit Cards:</label>
-<select name="creditcard">
-    <option>Visa</option>
+<select [(ngModel)]="creditCardValue" (change)="onSelectCreditCard($event.target.value)">
+    
+    <option *ngFor="let creditCard of selectedCustomerLive.creditCards" value={{creditCard.type}}>
+        {{creditCard.creditCardNamePlusType}}
+    </option>
 </select>
 
 <br />
 
 <label>Credit Card Number:</label>
-<span><strong>1234</strong></span>
+<span><strong>{{creditCardSelected.creditCardNumber}}</strong></span>
 
 <br />
 
 <label>Credit Card Balance:</label>
-<span><strong>1000</strong></span>
+<span><strong>{{creditCardSelected.balance}}</strong></span>
 
 <br />
 
 <label>Credit Card Limit:</label>
-<span><strong>10000</strong></span>
+<span><strong>{{creditCardSelected.limitAvailable}}</strong></span>
 
 <br /><br />
 
 <label>Amount to charge:</label>
 <input type="number"  />
-<button>Charge card</button>
+<button (click)="purchase()" >Charge card</button>
