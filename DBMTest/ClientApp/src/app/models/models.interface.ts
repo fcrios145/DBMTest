@@ -17,3 +17,9 @@ export interface CardChargeI {
   creditCardNumber: string;
   amountToCharge: number;
 }
+
+export interface ResponceCardCharge {
+  reason: string;
+  success: boolean;
+  payload?: any;
+}

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CustomerI, CreditCardI, CardChargeI } from '../models/models.interface';
+import { CustomerI, CreditCardI, CardChargeI, ResponceCardCharge } from '../models/models.interface';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +13,12 @@ export class HomeComponent {
   public selectedCustomerLive: CustomerI = { name: "test", creditCards: this.emptyCreditCards };
   public creditCardValue: string;
   public customerValue: string;
+  public chargeAmount: number;
 
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.creditCardSelected = { creditCardNumber: "0000", balance: 0, limit: 0, limitAvailable: 0, type: "EMPTY", creditCardNamePlusType: "EMPTY" };
-    http.get<CustomerI[]>(baseUrl + 'customer').subscribe(result => {
+    this.http.get<CustomerI[]>(baseUrl + 'customer').subscribe(result => {
       this.customers = result;
       console.log(this.customers);
     }, error => console.error(error));
@@ -33,14 +34,20 @@ export class HomeComponent {
     this.creditCardSelected = this.selectedCustomerLive.creditCards.find(item => item.type == type)
   }
 
-  purchase(http: HttpClient, @Inject('BASE_URL') baseUrl: string): void {
+  purchase(): void {
     const cardCharge: CardChargeI =
     {
       customerName: this.selectedCustomerLive.name,
       creditCardNumber: this.creditCardSelected.creditCardNumber,
-      amountToCharge: 100
+      amountToCharge: this.chargeAmount
     };
-    http.post<CustomerI>(baseUrl + 'card/charge', cardCharge).subscribe(result => {
+    this.http.post<ResponceCardCharge>('card/charge', cardCharge).subscribe(result => {
+      if (result.success) {
+        this.creditCardSelected = <CreditCardI>result.payload;
+        this.http.get<CustomerI[]>('customer').subscribe(result => {
+          this.customers = result;
+        }, error => console.error(error));
+      }
     }, error => console.error(error));
   }
 }

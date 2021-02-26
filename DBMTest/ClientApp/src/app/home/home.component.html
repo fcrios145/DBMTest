@@ -33,5 +33,5 @@
 <br /><br />
 
 <label>Amount to charge:</label>
-<input type="number"  />
+<input [(ngModel)]="chargeAmount" name="chargeAmount" type="number"  />
 <button (click)="purchase()" >Charge card</button>
