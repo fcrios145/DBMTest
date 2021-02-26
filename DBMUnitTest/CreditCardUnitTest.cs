@@ -1,0 +1,37 @@
+using System;
+using DBMTest;
+using Xunit;
+
+namespace DBMUnitTest
+{
+    public class CreditCardUnitTest
+    {
+        [Fact]
+        public void TestTypes()
+        {
+            CreditCard creditCardVisa = new CreditCard() { Number = "1234" };
+            CreditCard creditCardAmericanExpreess = new CreditCard() { Number = "5555" };
+            CreditCard creditCardMasterCard = new CreditCard() { Number = "8250" };
+            CreditCard creditCardNotFound = new CreditCard() { Number = "0101" };
+
+
+            Assert.Equal("VISA", creditCardVisa.Type);
+            Assert.Equal("MASTER CARD", creditCardMasterCard.Type);
+            Assert.Equal("AMERICAN EXPRESS", creditCardAmericanExpreess.Type);
+            Assert.Equal("NOT FOUND", creditCardNotFound.Type);
+        }
+
+        [Fact]
+        public void TestLimitAvailable()
+        {
+            CreditCard creditCardVisa = new CreditCard() { Number = "1234", Limit = 100 };
+            CreditCard creditCardMasterCard = new CreditCard() { Number = "8250", Limit = 1000 };
+            CreditCard creditCardAmericanExpreess = new CreditCard() { Number = "5555", Limit = 200 };
+
+            Assert.Equal(100, creditCardVisa.LimitAvailable);
+            Assert.Equal(1000, creditCardMasterCard.LimitAvailable);
+            Assert.Equal(180, creditCardAmericanExpreess.LimitAvailable);
+            
+        }
+    }
+}
