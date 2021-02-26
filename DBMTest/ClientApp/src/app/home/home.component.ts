@@ -46,7 +46,11 @@ export class HomeComponent {
         this.creditCardSelected = <CreditCardI>result.payload;
         this.http.get<CustomerI[]>('customer').subscribe(result => {
           this.customers = result;
+          this.chargeAmount = 0;
+          alert("Updated");
         }, error => console.error(error));
+      } else {
+        alert(result.reason);
       }
     }, error => console.error(error));
   }

@@ -18,7 +18,7 @@
 <br />
 
 <label>Credit Card Number:</label>
-<span><strong>{{creditCardSelected.creditCardNumber}}</strong></span>
+<span [ngClass]="{'error' : creditCardSelected.type == 'NOT FOUND' }"><strong>{{creditCardSelected.creditCardNumber}}</strong></span>
 
 <br />
 
@@ -34,4 +34,4 @@
 
 <label>Amount to charge:</label>
 <input [(ngModel)]="chargeAmount" name="chargeAmount" type="number"  />
-<button (click)="purchase()" >Charge card</button>
+<button [disabled]="creditCardSelected.balance >= creditCardSelected.limitAvailable" (click)="purchase()" >Charge card</button>

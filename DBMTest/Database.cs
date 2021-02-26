@@ -16,20 +16,26 @@ namespace DBMTest
                     new CreditCard()
                     {
                         CreditCardNumber = "1234",
-                        Balance = 100,
-                        Limit = 500
+                        Balance = 0,
+                        Limit = 100
                     },
                     new CreditCard()
                     {
                         CreditCardNumber = "5555",
-                        Balance = 100,
-                        Limit = 500
+                        Balance = 0,
+                        Limit = 200
                     },
                     new CreditCard()
                     {
                         CreditCardNumber = "8241",
-                        Balance = 100,
-                        Limit = 500
+                        Balance = 0,
+                        Limit = 300
+                    },
+                    new CreditCard()
+                    {
+                        CreditCardNumber = "0101",
+                        Balance = 0,
+                        Limit = 0
                     },
                 }
             });
@@ -41,20 +47,26 @@ namespace DBMTest
                     new CreditCard()
                     {
                         CreditCardNumber = "1234",
-                        Balance = 100,
+                        Balance = 0,
                         Limit = 500
                     },
                     new CreditCard()
                     {
                         CreditCardNumber = "5555",
-                        Balance = 100,
+                        Balance = 0,
                         Limit = 500
                     },
                     new CreditCard()
                     {
                         CreditCardNumber = "8241",
-                        Balance = 100,
-                        Limit = 500
+                        Balance = 0,
+                        Limit = 600
+                    },
+                    new CreditCard()
+                    {
+                        CreditCardNumber = "2222",
+                        Balance = 0,
+                        Limit = 0
                     },
                 }
             });
