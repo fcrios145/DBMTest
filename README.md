@@ -1,1 +1,1 @@
-## Please run `npm install` in `DBMTest/ClientApp/ClientApp` folder 
+## Please run `npm install` in `DBMTest/ClientApp` folder 
