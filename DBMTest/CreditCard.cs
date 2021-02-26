@@ -6,6 +6,21 @@ namespace DBMTest
         public string CreditCardNumber { get; set; }
         public double Balance { get; set; }
         public double Limit { get; set; }
+        public string ValidCreditCardNumber
+        { get
+          {
+                int sum = 0;
+                for (int i = 0; i < CreditCardNumber.Length; i++)
+                {
+                    sum += Convert.ToInt32(char.GetNumericValue(CreditCardNumber[i]));
+                }
+                if(sum == 20 || sum == 10 || sum == 15)
+                {
+                    return "VALID";
+                }
+                return "INVALID";
+            }
+        }
         public string CreditCardNamePlusType
         {
             get
@@ -35,18 +50,16 @@ namespace DBMTest
                 {
                     sum += Convert.ToInt32(char.GetNumericValue(CreditCardNumber[i]));
                 }
-                switch (sum)
+                if(sum <= 10)
                 {
-                    case 10:
-                        return "VISA";
-                    case 20:
-                        return "AMERICAN EXPRESS";
-                    case 15:
-                        return "MASTER CARD";
-                    default:
-                        break;
+                    return "VISA";
+                } else if(sum <= 15)
+                {
+                    return "MASTER CARD";
+                } else
+                {
+                    return "AMERICAN EXPRESS";
                 }
-                return "NOT FOUND";
             }
         }
     }

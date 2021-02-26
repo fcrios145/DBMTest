@@ -18,7 +18,18 @@ namespace DBMUnitTest
             Assert.Equal("VISA", creditCardVisa.Type);
             Assert.Equal("MASTER CARD", creditCardMasterCard.Type);
             Assert.Equal("AMERICAN EXPRESS", creditCardAmericanExpreess.Type);
-            Assert.Equal("NOT FOUND", creditCardNotFound.Type);
+            Assert.Equal("VISA", creditCardNotFound.Type);
+        }
+
+        [Fact]
+        public void TestValidCreditCardType()
+        {
+            CreditCard creditCardVisa = new CreditCard() { CreditCardNumber = "2222" };
+            CreditCard creditCardAmericanExpreess = new CreditCard() { CreditCardNumber = "5555" };
+
+            Assert.Equal("INVALID", creditCardVisa.ValidCreditCardNumber);
+            Assert.Equal("VALID", creditCardAmericanExpreess.ValidCreditCardNumber);
+
         }
 
         [Fact]

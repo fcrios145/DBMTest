@@ -13,17 +13,17 @@ namespace DBMTest.Controllers
     public class CardController : ControllerBase
     {
         [HttpPost("charge")]
-        public ResponseCardCharge<CreditCard> Charge(CardCharge cardCharge)
+        public ResponseCardCharge<Customer> Charge(CardCharge cardCharge)
         {
             Customer customer = Database.FindCustomerByName(cardCharge.CustomerName);
             CreditCard creditCard = Database.FindCreditCardByNumber(cardCharge.CreditCardNumber, customer);
             double finalResult = cardCharge.AmountToCharge + creditCard.Balance;
             if(finalResult > creditCard.LimitAvailable)
             {
-                return new ResponseCardCharge<CreditCard>() { Reason = "Limit exceeded", success = false };
+                return new ResponseCardCharge<Customer>() { Reason = "Limit exceeded", success = false };
             } else if (cardCharge.AmountToCharge < 0)
             {
-                return new ResponseCardCharge<CreditCard>() { Reason = "Can't send a negative number", success = false };
+                return new ResponseCardCharge<Customer>() { Reason = "Can't send a negative number", success = false };
             }
             if(Database.DeleteCreditCardByNumber(creditCard.CreditCardNumber, customer))
             {
@@ -31,7 +31,7 @@ namespace DBMTest.Controllers
                 Database.AddCreditCard(creditCard, customer.Name);
             }
 
-            return new ResponseCardCharge<CreditCard>() { success = true, Payload = creditCard };
+            return new ResponseCardCharge<Customer>() { success = true, Payload = customer };
         }
     }
 }

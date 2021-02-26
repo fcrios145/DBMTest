@@ -37,6 +37,12 @@ namespace DBMTest
                         Balance = 0,
                         Limit = 0
                     },
+                    new CreditCard()
+                    {
+                        CreditCardNumber = "9610",
+                        Balance = 0,
+                        Limit = 0
+                    },
                 }
             });
             customers.Add(new Customer()
@@ -65,6 +71,12 @@ namespace DBMTest
                     new CreditCard()
                     {
                         CreditCardNumber = "2222",
+                        Balance = 0,
+                        Limit = 0
+                    },
+                    new CreditCard()
+                    {
+                        CreditCardNumber = "9999",
                         Balance = 0,
                         Limit = 0
                     },

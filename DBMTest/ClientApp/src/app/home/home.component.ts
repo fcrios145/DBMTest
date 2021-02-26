@@ -12,7 +12,7 @@ export class HomeComponent {
   emptyCreditCards: CreditCardI[] = [{ creditCardNumber: "0000", balance: 0, limit: 0, limitAvailable: 0, type: "EMPTY", creditCardNamePlusType: "EMPTY" }]
   public selectedCustomerLive: CustomerI = { name: "test", creditCards: this.emptyCreditCards };
   public creditCardValue: string;
-  public customerValue: string;
+  public creditCardNamePlusType: string;
   public chargeAmount: number;
 
 
@@ -30,8 +30,9 @@ export class HomeComponent {
     this.creditCardValue = this.creditCardSelected.type;
   }
 
-  onSelectCreditCard(type: string): void {
-    this.creditCardSelected = this.selectedCustomerLive.creditCards.find(item => item.type == type)
+  onSelectCreditCard(creditCardNamePlusType: string): void {
+    this.creditCardNamePlusType = creditCardNamePlusType;
+    this.creditCardSelected = this.selectedCustomerLive.creditCards.find(item => item.creditCardNamePlusType == creditCardNamePlusType)
   }
 
   purchase(): void {
@@ -43,12 +44,8 @@ export class HomeComponent {
     };
     this.http.post<ResponceCardCharge>('card/charge', cardCharge).subscribe(result => {
       if (result.success) {
-        this.creditCardSelected = <CreditCardI>result.payload;
-        this.http.get<CustomerI[]>('customer').subscribe(result => {
-          this.customers = result;
-          this.chargeAmount = 0;
-          alert("Updated");
-        }, error => console.error(error));
+        this.selectedCustomerLive = <CustomerI>result.payload;
+        this.creditCardSelected = this.selectedCustomerLive.creditCards.find(item => item.creditCardNamePlusType == this.creditCardNamePlusType)
       } else {
         alert(result.reason);
       }

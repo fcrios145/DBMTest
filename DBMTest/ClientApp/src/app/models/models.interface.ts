@@ -5,6 +5,7 @@ export interface CreditCardI {
   limitAvailable: number;
   type: string;
   creditCardNamePlusType?: string;
+  validCreditCardNumber?: string;
 }
 
 export interface CustomerI {
